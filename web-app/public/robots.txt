@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Pages à exclure
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+
+# Sitemap
+Sitemap: https://piscineintelligent.web.app/sitemap.xml
+
+# Paramètres de crawl
+Crawl-delay: 1
+Clean-param: ref /search/
