@@ -3,7 +3,35 @@
 <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    
+    <!-- META TAGS ESSENTIELS -->
+    <title>SmartPool - Gestion Intelligente de Piscine | Surveillance Temps Réel</title>
+    <meta name="description" content="Application de gestion complète pour votre piscine. Surveillance temps réel du pH, température et niveau d'eau. Optimisation énergétique et rapports détaillés.">
+    <meta name="keywords" content="piscine, gestion piscine, smartpool, surveillance, pH, température, niveau eau, automation">
+    <meta name="author" content="SmartPool">
+    <meta name="robots" content="index, follow">
+    
+    <!-- OPEN GRAPH / SOCIAL MEDIA -->
+    <meta property="og:title" content="SmartPool - Gestion Intelligente de Piscine">
+    <meta property="og:description" content="Surveillance temps réel de votre piscine. pH, température et niveau d'eau en un clic.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/smartpool-preview.jpg">
+    <meta property="og:url" content="https://votre-domaine.com">
+    
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SmartPool - Gestion Intelligente de Piscine">
+    <meta name="twitter:description" content="Surveillance temps réel de votre piscine">
+    <meta name="twitter:image" content="/smartpool-preview.jpg">
+    
+    <!-- FAVICON & APP ICONS -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="msapplication-TileColor" content="#3b82f6">
     
     <!-- PRÉCHARGEMENT CRITIQUE -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,12 +41,73 @@
     <!-- PRÉCHARGEMENT FIREBASE -->
     <link rel="dns-prefetch" href="https://apis.google.com">
     <link rel="dns-prefetch" href="https://www.gstatic.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     
-    <title>SmartPool - Gestion Intelligente de Piscine</title>
-    <meta name="description" content="Application de gestion complète pour votre piscine. Surveillance temps réel, optimisation énergétique, rapports détaillés.">
+    <!-- PRÉCHARGEMENT DES RESSOURCES CRITIQUES -->
+    <link rel="preload" as="style" href="/src/index.css">
+    <link rel="preload" as="script" href="/src/main.jsx">
+    
+    <!-- POLICES OPTIMISÉES -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- STRUCTURED DATA / SCHEMA.ORG -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "SmartPool",
+        "description": "Application de gestion intelligente de piscine avec surveillance temps réel",
+        "url": "https://votre-domaine.com",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Web Browser",
+        "permissions": "browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+        }
+    }
+    </script>
+    
+    <!-- ANALYTICS (optionnel) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> -->
 </head>
 <body>
-    <div id="root"></div>
+    <!-- CONTENU DE FALLBACK POUR LE SEO -->
+    <noscript>
+        <div style="text-align: center; padding: 2rem; font-family: Arial, sans-serif;">
+            <h1>SmartPool - Gestion Intelligente de Piscine</h1>
+            <p>JavaScript est requis pour utiliser cette application. Veuillez activer JavaScript dans votre navigateur.</p>
+        </div>
+    </noscript>
+    
+    <!-- CONTAINER PRINCIPAL DE L'APPLICATION -->
+    <div id="root">
+        <!-- LOADING STATE INITIAL -->
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, #1e3a8a, #2563eb);">
+            <div style="text-align: center; color: white;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🏊‍♂️</div>
+                <h1 style="margin-bottom: 0.5rem;">SmartPool</h1>
+                <p>Chargement de l'application...</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SCRIPT PRINCIPAL -->
     <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- SCRIPT DE FALLBACK POUR LES VIEUX NAVIGATEURS -->
+    <script>
+        // Vérification des fonctionnalités modernes
+        if (!window.Promise || !window.fetch || !window.Symbol) {
+            document.getElementById('root').innerHTML = `
+                <div style="text-align: center; padding: 2rem; font-family: Arial, sans-serif;">
+                    <h1>Navigateur non supporté</h1>
+                    <p>Veuillez mettre à jour votre navigateur pour utiliser SmartPool.</p>
+                    <p>Nous recommandons Chrome, Firefox, Safari ou Edge récents.</p>
+                </div>
+            `;
+        }
+    </script>
 </body>
 </html>

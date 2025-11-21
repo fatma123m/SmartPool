@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import AuthPage from "./pages/AuthPage";
 import AlertsPage from "./pages/AlertsPage";
-
 import DashboardPiscineClient from "./pages/DashboardPiscineClient";
 import { auth } from "./firebase";
 
@@ -22,10 +21,19 @@ export default function App() {
           element={
             <ProtectedRoute>
               <DashboardPiscineClient />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/alerts"
+          element={
+            <ProtectedRoute>
               <AlertsPage />
             </ProtectedRoute>
           }
         />
+        {/* Redirection par défaut */}
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </BrowserRouter>
   );
