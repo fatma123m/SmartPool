@@ -10,10 +10,10 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { db, auth } from "../firebase"; // AJOUT: importer auth
-import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
-import { signOut } from "firebase/auth"; // AJOUT: importer signOut
-import { Link, useNavigate } from "react-router-dom"; // AJOUT: useNavigate
+import { db, auth } from "../firebase";
+import { collection, query, orderBy, onSnapshot, doc, getDoc } from "firebase/firestore"; // AJOUT: getDoc
+import { signOut } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../styles/DashboardPiscine.css";
 
@@ -22,7 +22,8 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip,
 export default function DashboardPiscineClient() {
   const [data, setData] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const navigate = useNavigate(); // AJOUT: navigate
+  const [pumpState, setPumpState] = useState(false); // AJOUT: État de la pompe
+  const navigate = useNavigate();
 
   useEffect(() => {
     const q = query(collection(db, "datavalide"), orderBy("timestamp", "desc"));
@@ -30,10 +31,24 @@ export default function DashboardPiscineClient() {
       const items = snapshot.docs.map((doc) => doc.data());
       setData(items.reverse());
     });
+
+    // AJOUT: Charger l'état de la pompe depuis Firebase
+    const loadPumpState = async () => {
+      try {
+        const pumpDoc = await getDoc(doc(db, "pumpState", "current"));
+        if (pumpDoc.exists()) {
+          setPumpState(pumpDoc.data().pompeOn);
+        }
+      } catch (error) {
+        console.error("Erreur lors du chargement de l'état de la pompe:", error);
+      }
+    };
+
+    loadPumpState();
+
     return () => unsubscribe();
   }, []);
 
-  // AJOUT: Fonction de déconnexion
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -118,7 +133,6 @@ export default function DashboardPiscineClient() {
               ⚠️ Alertes
             </Link>
           </li>
-          {/* AJOUT: Bouton déconnexion dans la sidebar */}
           <li className="logout-item">
             <button onClick={handleLogout} className="logout-btn">
               🚪 Déconnexion
@@ -135,7 +149,6 @@ export default function DashboardPiscineClient() {
         ></div>
       )}
 
-      {/* Main Content - AUCUNE MODIFICATION */}
       <main className="dashboard-main">
         <div className="main-header">
           <h1>📊 Dashboard Piscine Intelligente</h1>
@@ -152,7 +165,7 @@ export default function DashboardPiscineClient() {
           </div>
         </div>
 
-        {/* KPI Cards */}
+        {/* KPI Cards - AJOUT: Carte pour afficher l'état de la pompe */}
         <div className="kpi-container">
           <div className={`kpi-card ${alertNiveau ? "alert" : ""}`}>
             <div className="kpi-icon">💧</div>
@@ -178,6 +191,18 @@ export default function DashboardPiscineClient() {
               <h3>Température</h3>
               <p className="kpi-value">{latest.temperature}°C</p>
               <span className="kpi-label">Max: 30°C</span>
+            </div>
+          </div>
+
+          {/* AJOUT: Carte pour afficher l'état de la pompe (lecture seule) */}
+          <div className={`kpi-card ${pumpState ? "pump-on" : "pump-off"}`}>
+            <div className="kpi-icon">{pumpState ? "🔌" : "⭕"}</div>
+            <div className="kpi-content">
+              <h3>Pompe de filtration</h3>
+              <p className="kpi-value">{pumpState ? "ON" : "OFF"}</p>
+              <span className="kpi-label">
+                {pumpState ? "En fonctionnement" : "Arrêtée"}
+              </span>
             </div>
           </div>
         </div>

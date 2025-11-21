@@ -455,4 +455,70 @@ tbody tr:hover {
   color: white;
   border-left-color: #ef4444;
 }
+/* Styles pour la pompe - AJOUT SEULEMENT à la fin du fichier */
 
+/* Carte de la pompe */
+.pump-card {
+  position: relative;
+  border-left: 4px solid #64748b;
+}
+
+.pump-card.pump-on {
+  border-left-color: #10b981;
+  background: linear-gradient(135deg, #f0fdf4 0%, #fff 100%);
+}
+
+.pump-card.pump-off {
+  border-left-color: #64748b;
+  background: linear-gradient(135deg, #f8fafc 0%, #fff 100%);
+}
+
+/* Bouton de contrôle de la pompe */
+.pump-toggle-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.pump-toggle-btn.pump-on {
+  background: #ef4444;
+  color: white;
+}
+
+.pump-toggle-btn.pump-on:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+.pump-toggle-btn.pump-off {
+  background: #10b981;
+  color: white;
+}
+
+.pump-toggle-btn.pump-off:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+/* Responsive pour la carte pompe */
+@media (max-width: 768px) {
+  .pump-toggle-btn {
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-left: 0;
+  }
+}
+/* Styles pour la pompe - AJOUT SEULEMENT à la fin du fichier */
+.kpi-card.pump-on {
+  border-left-color: #10b981;
+}
+
+.kpi-card.pump-off {
+  border-left-color: #64748b;
+}
